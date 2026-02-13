@@ -210,37 +210,3 @@ if __name__ == '__main__':
     total_time = time.time() - total_time
     print(f'Average Inference Time: {total_time/opt.repeat_times:.5f}')
 
-
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'The runner slows down, taking deep breaths to recover energy.' --repeat_times 5 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'a person doing kung fu pose very fast' --repeat_times 5 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'The boxer dodges quickly, shifting their weight from side to side.' --repeat_times 5 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'a person turns around and quickly runs forward before doing kick.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'a person with knees bent, curls up by hunching over, and then stands straight up.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'a person jumps forwards and turns left in mid air' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'a person is making a high kick with his left leg.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'the person is throwing a baseball.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'a person is pushing a shopping cart.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'A person was pushed but did not fall.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'The person jumps in the air while doing a kick spin to the right.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'the figure is appears to be grabbing something for balance at shoulder height with their right hand as they balance with on foot with their left foot and twist their right from side to side, and side to side again.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'a person stands up from a kneeling position, using their right arm to help themselves up.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'A character is running on a treadmill.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'A man is walking forward then steps over an object then continues walking forward.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'A person bounces lightly on his foot, his stance loose and ready to move.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'A person steps forward explosively, driving his whole body into a crushing straight punch.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'A person lifts his left foot above his head and stretches his arms out to the sides.' --repeat_times 10 --motion_length 160 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'a man side steps to each side, rotating his body with each side step.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'The man walked forward, spun right on one foot and walked back to his original position.' --repeat_times 10 --motion_length 100 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'A man rises from the ground, walks to the left and sits back down on the ground.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'a person jogs in place, slowly at first, then increases speed.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'He ran a few steps and jumped into the air.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'The person jumps in the air while doing a kick spin to the right.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name t2m
-# python demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --text_prompt 'a person runs forward curving to the left.' --repeat_times 10 --motion_length 40 --gpu_id 0 --dataset_name t2m
-
-
-# python demo.py --name t2m_pkeep_rope_ffsize768_bs64_milestone100_200 --text_prompt 'a man with outstretched arms drops them to his side, then start walking and places his right hand on top of two objects as he walks by.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name motionx
-# python demo.py --name t2m_pkeep_rope_ffsize768_bs64_milestone100_200 --text_prompt 'A person is kicking a soccer ball while walking.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name motionx
-# python demo.py --name t2m_pkeep_rope_ffsize768_bs64_milestone100_200 --text_prompt 'A woman is doing a single leg balance.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name motionx
-# python demo.py --name t2m_pkeep_rope_ffsize768_bs64_milestone100_200 --text_prompt 'A woman is doing Sport Fitness Warm Up Walking.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name motionx
-# python demo.py --name t2m_pkeep_rope_ffsize768_bs64_milestone100_200 --text_prompt 'He ran a few steps and jumped into the air.' --repeat_times 10 --motion_length 196 --gpu_id 0 --dataset_name motionx
-

@@ -275,16 +275,3 @@ if __name__ == '__main__':
     total_time = time.time() - total_time
     print(f'Average Inference Time: {total_time/opt.repeat_times:.5f}')
 
-
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp3 -msec 0.4,0.7 --text_prompt "A man picks something from the ground using his right hand."
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp3 -msec 0.4,0.7 --text_prompt "A man picks something from the ground using his right hand." --source_motion "dataset/HumanML3D/new_joint_vecs/002198.npy"
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp3 -msec 0.3,0.7 --text_prompt "A person is walking while raise hands" --source_motion "dataset/HumanML3D/new_joint_vecs/002198.npy"  --repeat_times 10
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp0 -msec 0.3,0.7 --text_prompt "person is working on their boxing form" --source_motion "dataset/HumanML3D/new_joint_vecs/000933.npy"  --repeat_times 10
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp0 -msec 0.4,0.7 --text_prompt "person is working on their boxing form" --source_motion "dataset/HumanML3D/new_joint_vecs/002198.npy"  --repeat_times 10
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp18_2 -msec 0.0,0.5 --text_prompt "a man walks in a zig zag pattern." --source_motion "dataset/HumanML3D/new_joint_vecs/006591.npy" --repeat_times 10
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp21 -msec 0.0,0.2 0.75,1.0 --text_prompt "a person does a jumping jack" --source_motion "dataset/HumanML3D/new_joint_vecs/006591.npy" --repeat_times 10
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp22 -msec 0.0,0.2 0.8,1.0 --text_prompt "someone is walking diagonally across the screen" --source_motion "dataset/HumanML3D/new_joint_vecs/008642.npy" --repeat_times 10
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp23 -msec 0.0,0.5 --text_prompt "a person squats down and stands up." --source_motion "dataset/HumanML3D/new_joint_vecs/000926.npy" --repeat_times 10
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp24 -msec 0.0,0.5 --text_prompt "a person is making a high kick with his left leg." --source_motion "dataset/HumanML3D/new_joint_vecs/001973.npy" --repeat_times 10
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp25 -msec 0.6,1.0 --text_prompt "a person is sitting down on the ground." --source_motion "dataset/HumanML3D/new_joint_vecs/007846.npy" --repeat_times 10
-# python edit_demo.py --name t2m_pkeep_ope_ffsize768_bs64_milestone100_200_val --gpu_id 0 --ext exp26 -msec 0.0,0.1 --text_prompt "a person is sitting down on the ground." --source_motion "dataset/HumanML3D/new_joint_vecs/000926.npy" --repeat_times 10

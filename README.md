@@ -198,20 +198,20 @@ python eval_t2m.py --name t2m_pkeep_rope_ffsize768_bs64_milestone100_200 --datas
 
 ```bash
 # HumanML3D
-python train_svq.py --name your_tokenizer_name --dataset_name t2m --batch_size 1024 --using_znorm --eval_every_i 1000 --gpu_id 0
+python train_svq.py --name your_tokenizer_name --dataset_name t2m --using_znorm --gpu_id 0
 
 # Motion-X
-python train_svq.py --name your_tokenizer_name --dataset_name motionx --batch_size 1024 --using_znorm --eval_every_i 1000 --gpu_id 0
+python train_svq.py --name your_tokenizer_name --dataset_name motionx --using_znorm --gpu_id 0
 ```
 
 ### 🔹 Stage 2: Train SAR Transformer
 
 ```bash
 # HumanML3D
-python train_transformer.py --vq_name your_tokenizer_name --name your_generator_name --dataset_name t2m --batch_size 64 --ff_size 768 --milestones 100 200 --gpu_id 0
+python train_transformer.py --vq_name your_tokenizer_name --name your_generator_name --dataset_name t2m --gpu_id 0
 
 # Motion-X
-python train_transformer.py --vq_name your_tokenizer_name --name your_generator_name --dataset_name motionx --batch_size 64 --ff_size 768 --milestones 100 200 --gpu_id 0
+python train_transformer.py --vq_name your_tokenizer_name --name your_generator_name --dataset_name motionx --gpu_id 0
 ```
 
 ---
