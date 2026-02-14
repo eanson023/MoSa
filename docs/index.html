@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG" />
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG" />
+  <meta property="og:url" content="URL OF THE WEBSITE" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="assets/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="assets/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>MoSa: Motion Generation with Scalable Autoregressive Modeling</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/bulma.min.css">
+  <link rel="stylesheet" href="assets/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="assets/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBH0ZGR07H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-SBH0ZGR07H');
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="assets/js/fontawesome.all.min.js"></script>
+  <script src="assets/js/bulma-carousel.min.js"></script>
+  <script src="assets/js/bulma-slider.min.js"></script>
+  <script src="assets/js/index.js"></script>
+</head>
+
+<style>
+  .hover-effect {
+    display: inline-block;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+  }
+
+  .hover-effect img {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border: 2px solid transparent;
+    width: 600px;
+  }
+
+  .hover-effect:hover {
+    transform: translateY(-2px);
+  }
+
+  .hover-effect:hover img {
+    transform: scale(1.05);
+    opacity: 0.9;
+    cursor: pointer;
+    border: 3px solid #ce67e5;
+    box-shadow: 0 4px 8px rgba(219, 52, 177, 0.862);
+  }
+</style>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">MoSa: Motion Generation with Scalable Autoregressive Modeling</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="mailto:nkliuyifang@gmail.com" target="_blank">Mengyuan Liu</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="mailto:eanson023@gmail.com" target="_blank">Sheng Yan</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="mailto:ywang@cqut.edu.cn" target="_blank">Yong Wang</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="mailto:wallaceyjli@tencent.com" target="_blank">Yingjie Li</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="mailto:guibin.bian@ia.ac.cn" target="_blank">Gui-Bin Bian</a><sup>4</sup>,</span>
+              <span class="author-block">
+                <a href="mailto:hongliu@pku.edu.cn" target="_blank">Hong Liu</a><sup>1</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Peking University<br></span>
+              <span class="author-block"><sup>2</sup>Chongqing University of Technology<br></span>
+              <span class="author-block"><sup>3</sup>Tencent<br></span>
+              <span class="author-block"><sup>4</sup>Institute of Automation, Chinese Academy of Sciences<br></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Submitted to TVCG 2025</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="https://mc.manuscriptcentral.com/tvcg-cs" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://huggingface.co/spaces/MoSa-web/MoSa" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-rocket"></i>
+                    </span>
+                    <span>Program</span>
+                  </a>
+                </span>
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/MoSa-web/MoSa-web" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <!-- <span class="link-block">
+                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                  </a>
+                </span> -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Teaser video-->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body has-text-centered">
+        <img src="./assets/images/inference_example.jpg" height="80%"></img><br>
+      </div>
+      <h2 class="subtitle">
+        Our MoSa demonstrates a generation process from coarse to fine. The <a
+          href="https://huggingface.co/spaces/MoSa-web/MoSa" target="_blank" class="external-link">interactive
+          program</a> has been released, and you can adjust the "Scales" slider to intuitively experience this process!
+        🔥🔥🔥
+      </h2>
+      <div class="hero-body has-text-centered">
+        <a href="https://huggingface.co/spaces/MoSa-web/MoSa" target="_blank" class="hover-effect">
+          <img src="./assets/images/program.png" height="80%" alt="Program Image">
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- End teaser video -->
+
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We introduce MoSa, a novel hierarchical motion generation framework for text-driven 3D human motion
+              generation that enhances the Vector Quantization-guided Generative Transformers (VQ-GT) paradigm through a
+              coarse-to-fine scalable generation process. In MoSa, we propose a Multi-scale Token Preservation Strategy
+              (MTPS) integrated into a hierarchical residual vector quantization variational autoencoder (RQ-VAE). MTPS
+              employs interpolation at each hierarchical quantization to effectively retain coarse-to-fine varying-scale
+              tokens. With this, the generative transformer supports Scalable Autoregressive (SAR) modeling, which
+              predicts scale tokens, unlike traditional methods that predict only one token at each step. Consequently,
+              MoSa requires only 10 inference steps, matching the number of RQ-VAE quantization layers. To address
+              potential reconstruction degradation from frequent interpolation, we propose CAQ-VAE, a lightweight yet
+              expressive convolution-attention hybrid VQ-VAE. CAQ-VAE enhances residual block design and incorporates
+              attention mechanisms to better capture global dependencies. Extensive experiments show that MoSa achieves
+              state-of-the-art generation quality and efficiency, outperforming prior methods in both fidelity and
+              speed. On the Motion-X dataset, MoSa achieves an FID of 0.06 (versus MoMask’s 0.20) while reducing
+              inference time by 27\%. Moreover, MoSa generalizes well to downstream tasks such as motion editing,
+              requiring no additional fine-tuning.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+
+  <section class="section is-light is-small">
+    <div class="container is-max-desktop">
+      <center>
+        <h2 class="title is-3">Framework Overview</h2>
+      </center>
+      <div class="hero-body">
+        <a href="./assets/images/model.jpg"><img src="./assets/images/model.jpg" height="100%"></img></href></a><br>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </section>
+
+  <section class="hero is-small is-light">
+    <h2 class="has-text-centered"></h2>
+    <center>
+      <h2 class="title is-3">Gallery of Generation</h2>
+    </center>
+    <!-- <h2 class="has-text-centered">The video is currently being rendered and will be released next week. 🫡</h2> -->
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-multiline">
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"A man is walking forward then steps over an object then continues walking forward."</b></p><br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/A man is walking forward then steps over an object then continues walking forward_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"A person steps forward explosively, driving his whole body into a crushing straight punch."</b></p>
+              <br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/A person steps forward explosively, driving his whole body into a crushing straight punch_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"a person is pushing a shopping cart."</b></p><br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source src="./assets/videos/gallery/t2m/a person is pushing a shopping cart_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"a person jumps forwards and turns left in mid air."</b></p><br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/a person jumps forwards and turns left in mid air.bvh_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"a person was pushed but did not fall."</b></p><br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source src="./assets/videos/gallery/t2m/a person was pushed but did not fall_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"a man side steps to each side, rotating his body with each side step."</b></p><br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/a man side steps to each side, rotating his body with each side step_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"A person steps forward explosively, driving his whole body into a crushing straight punch."</b></p>
+              <br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/A person steps forward explosively, driving his whole body into a crushing straight punch_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"a person stands up from a kneeling position, using their right arm to help themselves up."</b></p>
+              <br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/a person stands up from a kneeling position, using their right arm to help themselves up_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"a person is making a high kick with his left leg."</b></p><br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/a person is making a high kick with his left leg_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"a person jogs in place, slowly at first, then increases speed."</b></p><br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/a person jogs in place, slowly at first, then increases speed_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"The person jumps in the air while doing a kick spin to the right."</b></p><br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/The person jumps in the air while doing a kick spin to the right_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"A person lifts his left foot above his head and grabs his left foot with his right hand."</b></p>
+              <br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/A person lifts his left foot above his head and grabs his left foot with his right hand_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"the person is throwing a baseball."</b></p><br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source src="./assets/videos/gallery/t2m/the person is throwing a baseball_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"the figure is appears to be grabbing something for balance at shoulder height with their right hand
+                  as they balance with on foot with their left foot and twist their right from side to side, and side to
+                  side again."</b></p><br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/the figure is appears to be grabbing something for balance at shoulder height with their right hand as they balance with on foot with their left foot and twist their right from side to side, and side to side again_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <!-- <div class="column is-one-third">
+          <div class="box has-text-centered" style="height: 100%;">
+            <p><b>"A character is running on a treadmill."</b></p><br>
+            <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%" style="width: 100%;">
+              <source src="./assets/videos/gallery/t2m/A character is running on a treadmill_compressed.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div> -->
+
+          <div class="column is-one-third">
+            <div class="box has-text-centered" style="height: 100%;">
+              <p><b>"A man rises from the ground, walks to the left and sits back down on the ground."</b></p><br>
+              <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
+                style="width: 100%;">
+                <source
+                  src="./assets/videos/gallery/t2m/A man rises from the ground, walks to the left and sits back down on the ground_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <center>
+        <h2 class="title is-3">Apply in Motion Editing</h2>
+      </center><br>
+      <p> Benefiting from our scalable autoregressive modeling paradigm, motion generation at each scale can
+        bidirectionally attend to intra-scale context and all preceding scale representations. Leveraging this design,
+        we further explore a compelling application of our model—Motion Editing—which requires <b>no additional
+          training</b>. Motion Editing encompasses a variety of sub-tasks, including motion inpainting, outpainting,
+        prefix filling, suffix filling, and free-form motion completion. A visualization of the results is shown below,
+        where input motion clips are highlighted in <span style="color:rgb(230, 155, 169);">pink</span>, and the
+        generated motions are depicted in <span style="color:red;">red</span>.</p>
+      <br>
+      <h2 class="title is-5">Motion Inpainitng (In-betweening)</h2>
+      <!-- (<span style="color:pink;">Pink</span>=Input, <span style="color:red;">Red</span>=Generation) -->
+      <p>Generating 50% motion in the middle based on the text <span style="color:red;">"person is working on their
+          boxing form."</span> conditioned on first 25% and last 25% of motion of <span
+          style="color:rgb(230, 155, 169);">"a person walks forward while being assisted by hand rails."</span></p>
+      <div class="columns is-centered">
+        <div class="column">
+          <div id="video-container">
+            <center>
+              <p><b>Source Motion</b></p>
+            </center>
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/inpainting1_source.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <center>
+              <p><b> + "person is working on their boxing form."</b></p>
+            </center>
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/inpainting1.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <br>
+      <p>Generating 50% motion in the middle based on the text <span style="color:red;">"a person jogs in place."</span>
+        conditioned on first 25% and last 25% of motion of <span style="color:rgb(230, 155, 169);">"a person walks half
+          a circle clockwise, then another half circle counter-clockwise."</span></p>
+      <div class="columns is-centered">
+        <div class="column">
+          <div id="video-container">
+            <center>
+              <p><b>Source Motion</b></p>
+            </center>
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/inpainting2_source.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <center>
+              <p><b> + "a person jogs in place."</b></p>
+            </center>
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/inpainting2.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- ----------------------------------------- -->
+
+      <br>
+      <h2 class="title is-5">Motion Outpainitng</h2>
+      <!-- (<span style="color:pink;">Pink</span>=Input, <span style="color:red;">Red</span>=Generation) -->
+      <p>Generating 25% beginning motion and 25% end motion based on the text <span style="color:red;">"a person does a
+          jumping jack."</span> conditioned on the 50% middle motion of <span style="color:rgb(230, 155, 169);">"a
+          person appears to be playing tennins."</span></p>
+      <div class="columns is-centered">
+        <div class="column">
+          <div id="video-container">
+            <center>
+              <p><b>Source Motion</b></p>
+            </center>
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/outpainting1_source.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <center>
+              <p><b> + "a person does a jumping jack."</b></p>
+            </center>
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/outpainting1.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <br>
+      <p>Generating 25% beginning motion and 25% end motion based on the text <span style="color:red;">"someone is
+          walking diagonally across the screen"</span> conditioned on the 50% middle motion of <span
+          style="color:rgb(230, 155, 169);">"person is doing kicking motions with left leg."</span></p>
+      <div class="columns is-centered">
+        <div class="column">
+          <div id="video-container">
+            <center>
+              <p><b>Source Motion</b></p>
+            </center>
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/outpainting2_source.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <center>
+              <p><b> + "someone is walking diagonally across the screen"</b></p>
+            </center>
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/outpainting2.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- ----------------------------------------- -->
+
+      <br>
+      <h2 class="title is-5">Prefix filling</h2>
+      <!-- (<span style="color:pink;">Pink</span>=Input, <span style="color:red;">Red</span>=Generation) -->
+      <p>Generating 50% beginning motion based on the text <span style="color:red;">"a person squats down and stands
+          up."</span> conditioned on the 50% last motion of <span style="color:rgb(230, 155, 169);">"a person pretends
+          to be a dinosuar."</span></p>
+      <div class="columns is-centered">
+        <div class="column">
+          <div id="video-container">
+            <center>
+              <p><b>Source Motion</b></p>
+            </center>
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/prefix1_source.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <center>
+              <p><b> + "a person squats down and stands up."</b></p>
+            </center>
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/prefix1.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <br>
+      <p>Generating 50% beginning motion based on the text <span style="color:red;">"a person is making a high kick with
+          his left leg."</span> conditioned on the 50% last motion of <span style="color:rgb(230, 155, 169);">"a person
+          acts in a shy way while walking."</span></p>
+      <div class="columns is-centered">
+        <div class="column">
+          <div id="video-container">
+            <center>
+              <p><b>Source Motion</b></p>
+            </center>
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/prefix2_source.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <center>
+              <p><b> + "a person is making a high kick with his left leg."</b></p>
+            </center>
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/prefix2.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- ----------------------------------------- -->
+
+      <br>
+      <h2 class="title is-5">Suffix filling</h2>
+      <!-- (<span style="color:pink;">Pink</span>=Input, <span style="color:red;">Red</span>=Generation) -->
+      <p>Generating 50% end motion based on the text <span style="color:red;">"a person walking forward in slow
+          motion."</span> conditioned on the 50% beginning motion of <span style="color:rgb(230, 155, 169);">"person is
+          walking backwards."</span></p>
+      <div class="columns is-centered">
+        <div class="column">
+          <div id="video-container">
+            <center>
+              <p><b>Source Motion</b></p>
+            </center>
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/suffix1_source.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <center>
+              <p><b> + "a person walking forward in slow motion."</b></p>
+            </center>
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/suffix1.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <br>
+      <p>Generating 50% end motion based on the text <span style="color:red;">"a person is sitting down on the
+          ground."</span> conditioned on the 50% beginning motion of <span style="color:rgb(230, 155, 169);">"a person
+          appears to be playing the violin."</span></p>
+      <div class="columns is-centered">
+        <div class="column">
+          <div id="video-container">
+            <center>
+              <p><b>Source Motion</b></p>
+            </center>
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/suffix2_source.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <center>
+              <p><b> + "a person is sitting down on the ground."</b></p>
+            </center>
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/suffix2.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- ----------------------------------------- -->
+
+
+      <br>
+      <h2 class="title is-5">Free-form Motion Completion</h2>
+      The motion completion task operates without language conditioning. (<span
+        style="color:rgb(230, 155, 169);">Pink</span>=Input, <span style="color:red;">Red</span>=Generation)
+      <br>
+      <div class="columns is-centered">
+        <div class="column">
+          <div id="video-container">
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/completion1.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/completion2.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column">
+          <div id="video-container">
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/completion3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/completion4.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- ----------------------------------------- -->
+
+
+
+
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <center>
+        <h2 class="title is-3">Analysis in Generation</h2>
+      </center><br>
+      <p>
+        To validate the effectiveness of MoSa's coarse-to-fine generation, we visualize the generation process. The
+        motion at the intermediate scale is presented. At the initial stage (eg, <span style="color:purple;">Scale 2,
+          4</span>), the generated motion exhibits key poses but lacks proper limb coordination. As the generation
+        progresses (eg, <span style="color:purple;">Scale 8, 10</span>), the poses become increasingly natural, with
+        more refined details.
+      </p>
+      <br>
+      <h3 class="title is-5">"a person doing a wushu jump."</h2>
+        <!-- (<span style="color:purple;">Purple</span>=Input, <span style="color:#76D7C4;">Cyan</span>=Synthesis) -->
+        <div class="columns is-centered">
+          <div class="column">
+            <div id="video-container">
+              <center>
+                <p><b>Scale 2</b></p>
+              </center>
+              <video id="video" autoplay controls muted loop playsinline height="40%">
+                <source src="./assets/videos/scale/a person doing a wushu jump scale1_compressed.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content">
+              <center>
+                <p><b>Scale 4</b></p>
+              </center>
+              <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                <source src="./assets/videos/scale/a person doing a wushu jump scale3_compressed.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content">
+              <center>
+                <p><b>Scale 6</b></p>
+              </center>
+              <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                <source src="./assets/videos/scale/a person doing a wushu jump scale5_compressed.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+        <div class="columns is-centered">
+          <div class="column">
+            <div id="video-container">
+              <center>
+                <p><b>Scale 8</b></p>
+              </center>
+              <video id="video" autoplay controls muted loop playsinline height="40%">
+                <source src="./assets/videos/scale/a person doing a wushu jump scale7_compressed.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content">
+              <center>
+                <p><b>Scale 10</b></p>
+              </center>
+              <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                <source src="./assets/videos/scale/a person doing a wushu jump scale9_compressed.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+        <!-- ----------------------------------------- -->
+
+        <br>
+        <h3 class="title is-5">"He ran a few steps and jumped into the air."</h2>
+          <div class="columns is-centered">
+            <div class="column">
+              <div id="video-container">
+                <center>
+                  <p><b>Scale 2</b></p>
+                </center>
+                <video id="video" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/scale/He ran a few steps and jumped into the air scale1_compressed.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column">
+              <div class="content">
+                <center>
+                  <p><b>Scale 4</b></p>
+                </center>
+                <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/scale/He ran a few steps and jumped into the air scale3_compressed.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column">
+              <div class="content">
+                <center>
+                  <p><b>Scale 6</b></p>
+                </center>
+                <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/scale/He ran a few steps and jumped into the air scale5_compressed.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+          <div class="columns is-centered">
+            <div class="column">
+              <div id="video-container">
+                <center>
+                  <p><b>Scale 8</b></p>
+                </center>
+                <video id="video" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/scale/He ran a few steps and jumped into the air scale7_compressed.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column">
+              <div class="content">
+                <center>
+                  <p><b>Scale 10</b></p>
+                </center>
+                <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/scale/He ran a few steps and jumped into the air scale9_compressed.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+          <!-- ----------------------------------------- -->
+
+          <br>
+          <h3 class="title is-5">"taking strides forward, pivot swiftly on the left foot, and then walk the other way."
+            </h2>
+            <div class="columns is-centered">
+              <div class="column">
+                <div id="video-container">
+                  <center>
+                    <p><b>Scale 2</b></p>
+                  </center>
+                  <video id="video" autoplay controls muted loop playsinline height="40%">
+                    <source
+                      src="./assets/videos/scale/taking strides forward, pivot swiftly on the left foot, and then walk the other way scale1_compressed.mp4"
+                      type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="column">
+                <div class="content">
+                  <center>
+                    <p><b>Scale 4</b></p>
+                  </center>
+                  <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                    <source
+                      src="./assets/videos/scale/taking strides forward, pivot swiftly on the left foot, and then walk the other way scale3_compressed.mp4"
+                      type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="column">
+                <div class="content">
+                  <center>
+                    <p><b>Scale 6</b></p>
+                  </center>
+                  <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                    <source
+                      src="./assets/videos/scale/taking strides forward, pivot swiftly on the left foot, and then walk the other way scale5_compressed.mp4"
+                      type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="columns is-centered">
+              <div class="column">
+                <div id="video-container">
+                  <center>
+                    <p><b>Scale 8</b></p>
+                  </center>
+                  <video id="video" autoplay controls muted loop playsinline height="40%">
+                    <source
+                      src="./assets/videos/scale/taking strides forward, pivot swiftly on the left foot, and then walk the other way scale7_compressed.mp4"
+                      type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="column">
+                <div class="content">
+                  <center>
+                    <p><b>Scale 10</b></p>
+                  </center>
+                  <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                    <source
+                      src="./assets/videos/scale/taking strides forward, pivot swiftly on the left foot, and then walk the other way scale9_compressed.mp4"
+                      type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <!-- ----------------------------------------- -->
+
+            <br>
+            <h3 class="title is-5">"The person performs a left knee tuck snap dow."</h2>
+              <div class="columns is-centered">
+                <div class="column">
+                  <div id="video-container">
+                    <center>
+                      <p><b>Scale 2</b></p>
+                    </center>
+                    <video id="video" autoplay controls muted loop playsinline height="40%">
+                      <source
+                        src="./assets/videos/scale/The person performs a left knee tuck snap dow scale1_compressed.mp4"
+                        type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="content">
+                    <center>
+                      <p><b>Scale 4</b></p>
+                    </center>
+                    <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                      <source
+                        src="./assets/videos/scale/The person performs a left knee tuck snap dow scale3_compressed.mp4"
+                        type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="content">
+                    <center>
+                      <p><b>Scale 6</b></p>
+                    </center>
+                    <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                      <source
+                        src="./assets/videos/scale/The person performs a left knee tuck snap dow scale5_compressed.mp4"
+                        type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="columns is-centered">
+                <div class="column">
+                  <div id="video-container">
+                    <center>
+                      <p><b>Scale 8</b></p>
+                    </center>
+                    <video id="video" autoplay controls muted loop playsinline height="40%">
+                      <source
+                        src="./assets/videos/scale/The person performs a left knee tuck snap dow scale7_compressed.mp4"
+                        type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="content">
+                    <center>
+                      <p><b>Scale 10</b></p>
+                    </center>
+                    <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                      <source
+                        src="./assets/videos/scale/The person performs a left knee tuck snap dow scale9_compressed.mp4"
+                        type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+
+    </div>
+  </section>
+
+
+
+  <section class="hero is-small is-light">
+    <div class="container is-max-desktop">
+
+      <center>
+        <h2 class="title is-3">Comparisons</h2>
+      </center><br>
+      <br>
+      <!-- <center><h2 class="title is-4">Visual Results</h2></center><br> -->
+      <h3 class="title is-5">"The runner slows down, taking deep breaths to recover energy."</h2>
+        <div class="columns is-centered">
+          <div class="column">
+            <div id="video-container">
+              <center>
+                <p><b>T2M-GPT</b></p>
+              </center>
+              <video id="video" autoplay controls muted loop playsinline height="40%">
+                <source
+                  src="./assets/videos/comparison/The runner slows down, taking deep breaths to recover energy./t2m-gpt_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content">
+              <center>
+                <p><b>MLD</b></p>
+              </center>
+              <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                <source
+                  src="./assets/videos/comparison/The runner slows down, taking deep breaths to recover energy./mld_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="column">
+            <div id="video-container">
+              <center>
+                <p><b>MoMask</b></p>
+              </center>
+              <video id="video" autoplay controls muted loop playsinline height="40%">
+                <source
+                  src="./assets/videos/comparison/The runner slows down, taking deep breaths to recover energy./momask_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content">
+              <center>
+                <p><b><span style="color:rgb(211, 48, 48);">MoSa (Ours)</span></b></p>
+              </center>
+              <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                <source
+                  src="./assets/videos/comparison/The runner slows down, taking deep breaths to recover energy./mosa_compressed.mp4"
+                  type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+        <!-- -------------------- -->
+        <br>
+        <h3 class="title is-5">"a person doing kung fu pose very fast."</h2>
+          <div class="columns is-centered">
+            <div class="column">
+              <div id="video-container">
+                <center>
+                  <p><b>T2M-GPT</b></p>
+                </center>
+                <video id="video" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/comparison/a person doing kung fu pose very fast/t2m-gpt_compressed.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column">
+              <div class="content">
+                <center>
+                  <p><b>MLD</b></p>
+                </center>
+                <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/comparison/a person doing kung fu pose very fast/mld_compressed.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column">
+              <div id="video-container">
+                <center>
+                  <p><b>MoMask</b></p>
+                </center>
+                <video id="video" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/comparison/a person doing kung fu pose very fast/momask_compressed.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column">
+              <div class="content">
+                <center>
+                  <p><b><span style="color:rgb(211, 48, 48);">MoSa (Ours)</span></b></p>
+                </center>
+                <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/comparison/a person doing kung fu pose very fast/mosa_compressed.mp4"
+                    type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- -------------------- -->
+          <br>
+          <h3 class="title is-5">"a person with knees bent, curls up by hunching over, and then <span
+              style="color:blue">stands straight up.</span>"</h2>
+            <div class="columns is-centered">
+              <div class="column">
+                <div id="video-container">
+                  <center>
+                    <p><b>T2M-GPT</b></p>
+                  </center>
+                  <video id="video" autoplay controls muted loop playsinline height="40%">
+                    <source
+                      src="./assets/videos/comparison/a person with knees bent, curls up by hunching over, and then stands straight up/t2m-gpt_compressed.mp4"
+                      type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="column">
+                <div class="content">
+                  <center>
+                    <p><b>MLD</b></p>
+                  </center>
+                  <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                    <source
+                      src="./assets/videos/comparison/a person with knees bent, curls up by hunching over, and then stands straight up/mld_compressed.mp4"
+                      type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="column">
+                <div id="video-container">
+                  <center>
+                    <p><b>MoMask</b></p>
+                  </center>
+                  <video id="video" autoplay controls muted loop playsinline height="40%">
+                    <source
+                      src="./assets/videos/comparison/a person with knees bent, curls up by hunching over, and then stands straight up/momask_compressed.mp4"
+                      type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div class="column">
+                <div class="content">
+                  <center>
+                    <p><b><span style="color:rgb(211, 48, 48);">MoSa (Ours)</span></b></p>
+                  </center>
+                  <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                    <source
+                      src="./assets/videos/comparison/a person with knees bent, curls up by hunching over, and then stands straight up/mosa_compressed.mp4"
+                      type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+
+            <!-- -------------------- -->
+            <br>
+            <h3 class="title is-5">"a person <span style="color:blue">turns around</span> and quickly runs forward
+              before doing kick."</h2>
+              <div class="columns is-centered">
+                <div class="column">
+                  <div id="video-container">
+                    <center>
+                      <p><b>T2M-GPT</b></p>
+                    </center>
+                    <video id="video" autoplay controls muted loop playsinline height="40%">
+                      <source
+                        src="./assets/videos/comparison/a person turns around and quickly runs forward before doing kick/t2m-gpt_compressed.mp4"
+                        type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="content">
+                    <center>
+                      <p><b>MLD</b></p>
+                    </center>
+                    <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                      <source
+                        src="./assets/videos/comparison/a person turns around and quickly runs forward before doing kick/mld_compressed.mp4"
+                        type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+                <div class="column">
+                  <div id="video-container">
+                    <center>
+                      <p><b>MoMask</b></p>
+                    </center>
+                    <video id="video" autoplay controls muted loop playsinline height="40%">
+                      <source
+                        src="./assets/videos/comparison/a person turns around and quickly runs forward before doing kick/momask_compressed.mp4"
+                        type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="content">
+                    <center>
+                      <p><b><span style="color:rgb(211, 48, 48);">MoSa (Ours)</span></b></p>
+                    </center>
+                    <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                      <source
+                        src="./assets/videos/comparison/a person turns around and quickly runs forward before doing kick/mosa_compressed.mp4"
+                        type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <br>
+              <!-- -------------------- -->
+
+              <!--     
+    <br>
+    <center><h2 class="title is-4">Failure cases</h2></center><br>
+    <br>
+    <h3 class="title is-5">"The boxer dodges quickly, shifting their weight from side to side."</h2>
+      <div class="columns is-centered">
+        <div class="column">
+          <div id="video-container">
+            <center><p><b>T2M-GPT</b></p></center>
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+                <source src="./assets/videos/comparison/The boxer dodges quickly, shifting their weight from side to side/t2m-gpt_compressed.mp4"
+                        type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <center><p><b>MLD</b></p></center>
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                <source src="./assets/videos/comparison/The boxer dodges quickly, shifting their weight from side to side/mld_compressed.mp4"
+                        type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="column">
+          <div id="video-container">
+            <center><p><b>MoMask</b></p></center>
+            <video id="video" autoplay controls muted loop playsinline height="40%">
+                <source src="./assets/videos/comparison/The boxer dodges quickly, shifting their weight from side to side/momask_compressed.mp4"
+                        type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <center><p><b><span style="color:rgb(211, 48, 48);">MoSa (Ours)</span></b></p></center>
+            <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                <source src="./assets/videos/comparison/The boxer dodges quickly, shifting their weight from side to side/mosa_compressed.mp4"
+                        type="video/mp4">
+              </video>
+          </div>
+        </div>
+      </div> -->
+              <!-- -------------------- -->
+              <!-- <br>
+      <h3 class="title is-5">"The soccer player kicks the ball with a powerful motion. "</h2>
+        <div class="columns is-centered">
+          <div class="column">
+            <div id="video-container">
+              <center><p><b>T2M-GPT</b></p></center>
+              <video id="video" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/comparison/The soccer player kicks the ball with a powerful motion./t2m-gpt_compressed.mp4"
+                          type="video/mp4">
+                </video>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content">
+              <center><p><b>MLD</b></p></center>
+              <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/comparison/The soccer player kicks the ball with a powerful motion./mld_compressed.mp4"
+                          type="video/mp4">
+                </video>
+            </div>
+          </div>
+          <div class="column">
+            <div id="video-container">
+              <center><p><b>MoMask</b></p></center>
+              <video id="video" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/comparison/The soccer player kicks the ball with a powerful motion./momask_compressed.mp4"
+                          type="video/mp4">
+                </video>
+            </div>
+          </div>
+          <div class="column">
+            <div class="content">
+              <center><p><b><span style="color:rgb(211, 48, 48);">MoSa (Ours)</span></b></p></center>
+              <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+                  <source src="./assets/videos/comparison/The soccer player kicks the ball with a powerful motion./mosa_compressed.mp4"
+                          type="video/mp4">
+                </video>
+            </div>
+          </div>
+        </div> -->
+              <!-- -------------------- -->
+
+    </div>
+  </section>
+
+  <!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{liu2025mosa,
+  title={Mosa: Motion generation with scalable autoregressive modeling},
+  author={Liu, Mengyuan and Yan, Sheng and Wang, Yong and Li, Yingjie and Bian, Gui-Bin and Liu, Hong},
+  journal={arXiv preprint arXiv:2511.01200},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you link back to this page in the
+              footer. <br> This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Statcounter tracking code -->
+
+  <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+  <!-- End of Statcounter Code -->
+
+</body>
+
+</html>
