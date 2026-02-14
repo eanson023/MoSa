@@ -2,7 +2,7 @@
 
 # MoSa: Motion Generation with Scalable Autoregressive Modeling
 
-**[📄 Paper](https://arxiv.org/abs/2511.01200)** | **[🌐 Project Page](https://eanson023.github.io/MoSa)** | **[🤗 Demo](https://huggingface.co/spaces/MoSa-web/MoSa)**
+**[📄 Paper](https://arxiv.org/abs/2511.01200)** | **[🌐 Project Page](https://eanson023.github.io/MoSa/)** | **[🤗 Demo](https://huggingface.co/spaces/MoSa-web/MoSa)**
 
 <img src="assets/mosa.jpg" alt="MoSa Model Architecture" width="800">
 
