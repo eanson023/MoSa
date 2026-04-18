@@ -29,7 +29,7 @@ clip_version = 'ViT-B/32'
 
 WEBSITE = """
 <div class="embed_hidden">
-<h1 style='text-align: center'> MoSa: Motion Generation with Scalable Autoregressive Modeling </h1>
+<h1 style='text-align: center'> MoSa: Motion Generation with Scale-wise Autoregressive Modeling </h1>
 <h2 style='text-align: center'>
 <a href="" target="_blank"><nobr>Anonymous authors</nobr></a> &emsp;
 </h2>

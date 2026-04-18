@@ -1,6 +1,6 @@
 <div align="center">
 
-# MoSa: Motion Generation with Scalable Autoregressive Modeling
+# MoSa: Motion Generation with Scale-wise Autoregressive Modeling
 
 **[📄 Paper](https://arxiv.org/abs/2511.01200)** | **[🌐 Project Page](https://eanson023.github.io/MoSa/)** | **[🤗 Demo](https://huggingface.co/spaces/MoSa-web/MoSa)**
 
@@ -219,7 +219,7 @@ If you find MoSa useful for your research, please cite:
 
 ```bibtex
 @article{liu2025mosa,
-  title={Mosa: Motion generation with scalable autoregressive modeling},
+  title={MoSa: Motion Generation with Scale-wise Autoregressive Modeling},
   author={Liu, Mengyuan and Yan, Sheng and Wang, Yong and Li, Yingjie and Bian, Gui-Bin and Liu, Hong},
   journal={arXiv preprint arXiv:2511.01200},
   year={2025}
