@@ -27,3 +27,4 @@ torchtext==0.15.0
 tqdm
 trimesh
 spacy==3.2.1
+gradio

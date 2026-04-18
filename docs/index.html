@@ -25,7 +25,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title>MoSa: Motion Generation with Scalable Autoregressive Modeling</title>
+  <title>MoSa: Motion Generation with Scale-wise Autoregressive Modeling</title>
   <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
@@ -197,21 +197,8 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              We introduce MoSa, a novel hierarchical motion generation framework for text-driven 3D human motion
-              generation that enhances the Vector Quantization-guided Generative Transformers (VQ-GT) paradigm through a
-              coarse-to-fine scalable generation process. In MoSa, we propose a Multi-scale Token Preservation Strategy
-              (MTPS) integrated into a hierarchical residual vector quantization variational autoencoder (RQ-VAE). MTPS
-              employs interpolation at each hierarchical quantization to effectively retain coarse-to-fine varying-scale
-              tokens. With this, the generative transformer supports Scalable Autoregressive (SAR) modeling, which
-              predicts scale tokens, unlike traditional methods that predict only one token at each step. Consequently,
-              MoSa requires only 10 inference steps, matching the number of RQ-VAE quantization layers. To address
-              potential reconstruction degradation from frequent interpolation, we propose CAQ-VAE, a lightweight yet
-              expressive convolution-attention hybrid VQ-VAE. CAQ-VAE enhances residual block design and incorporates
-              attention mechanisms to better capture global dependencies. Extensive experiments show that MoSa achieves
-              state-of-the-art generation quality and efficiency, outperforming prior methods in both fidelity and
-              speed. On the Motion-X dataset, MoSa achieves an FID of 0.06 (versus MoMask’s 0.20) while reducing
-              inference time by 27\%. Moreover, MoSa generalizes well to downstream tasks such as motion editing,
-              requiring no additional fine-tuning.
+              Text-driven 3D human motion generation has gained considerable attention, and the dominant Vector Quantization-guided Generative Transformers (VQ-GT) paradigm shows great promise. Recent methods adopt residual VQ to preserve fine-grained motion details with multi-layer tokens. However, the multi-fold increase in token count substantially complicates the GT phase. Existing methods typically employ two independent transformers to separately model base and residual tokens, leading to inherent cross-layer misalignment that compromises structural coherence.
+To address this, we introduce MoSa, a cohesive framework that reconciles quantization and generation through a coarse-to-fine hierarchical process. We propose Multi-scale Token Preservation Strategy (MTPS) that applies progressively scaled interpolations at each residual quantization layer to effectively retain multi-scale tokens. This empowers a single transformer to jointly model all hierarchical tokens via Scale-wise AutoRegressive (SAR) modeling. With this, SAR facilitates coherent cross-scale dependency modeling within a unified architecture while logically aligning inference steps with quantization layers. Furthermore, as frequent interpolation in MTPS induces reconstruction degradation, we propose CAQ-VAE, a convolution-attention hybrid VQ-VAE that enhances residual blocks and captures global dependencies for high-fidelity reconstruction. Extensive experiments demonstrate that MoSa achieves state-of-the-art performance in both generation quality and efficiency. On Motion-X, MoSa attains an FID of 0.06 (versus MoMask's 0.20) while reducing inference time by 27%. Beyond generation, we demonstrate that MoSa supports motion editing without additional fine-tuning.
             </p>
           </div>
         </div>
@@ -283,7 +270,7 @@
               <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
                 style="width: 100%;">
                 <source
-                  src="./assets/videos/gallery/t2m/a person jumps forwards and turns left in mid air.bvh_compressed.mp4"
+                  src="./assets/videos/gallery/t2m/a person jumps forwards and turns left in mid air_compressed.mp4"
                   type="video/mp4">
               </video>
             </div>
@@ -366,11 +353,11 @@
 
           <div class="column is-one-third">
             <div class="box has-text-centered" style="height: 100%;">
-              <p><b>"The person jumps in the air while doing a kick spin to the right."</b></p><br>
+              <p><b>"a person starts jogging slightly forwards creating a loop and stopping."</b></p><br>
               <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
                 style="width: 100%;">
                 <source
-                  src="./assets/videos/gallery/t2m/The person jumps in the air while doing a kick spin to the right_compressed.mp4"
+                  src="./assets/videos/gallery/t2m/a person starts jogging slightly forwards creating a loop and stopping_compressed.mp4"
                   type="video/mp4">
               </video>
             </div>
@@ -411,7 +398,7 @@
               <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
                 style="width: 100%;">
                 <source
-                  src="./assets/videos/gallery/t2m/the figure is appears to be grabbing something for balance at shoulder height with their right hand as they balance with on foot with their left foot and twist their right from side to side, and side to side again_compressed.mp4"
+                  src="./assets/videos/gallery/t2m/the figure is appears to be grabbing something for balance_compressed.mp4"
                   type="video/mp4">
               </video>
             </div>
@@ -428,11 +415,11 @@
 
           <div class="column is-one-third">
             <div class="box has-text-centered" style="height: 100%;">
-              <p><b>"A man rises from the ground, walks to the left and sits back down on the ground."</b></p><br>
+              <p><b>"The man walked forward, spun right on one foot and walked back to his original position."</b></p><br>
               <video poster="" id="tree" disablepictureinpicture autoplay controls muted loop playsinline height="100%"
                 style="width: 100%;">
                 <source
-                  src="./assets/videos/gallery/t2m/A man rises from the ground, walks to the left and sits back down on the ground_compressed.mp4"
+                  src="./assets/videos/gallery/t2m/The man walked forward, spun right on one foot and walked back to his original position_compressed.mp4"
                   type="video/mp4">
               </video>
             </div>

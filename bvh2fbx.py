@@ -108,6 +108,8 @@ def bvh2fbx(bvh_path, fbx_choice, output_path, motion_length=196):
 
     # perform retarget
     bpy.ops.wm.perform_animation_transfer()
+    # NOTE: must twice to ensure the animation is correctly transferred.
+    bpy.ops.wm.perform_animation_transfer()
 
     # save
     if bpy.context.mode != 'OBJECT':

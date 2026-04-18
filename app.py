@@ -48,9 +48,31 @@ We use the <a href="https://github.com/nkeeline/Keemap-Blender-Rig-ReTargeting-A
 """
 
 EXAMPLES = [
-   "A person is running on a treadmill.", "The person takes 4 steps backwards.", 
-#    "A person jumps up and then lands.", 
-   "The person was pushed but did not fall.", 
+   "The runner slows down, taking deep breaths to recover energy.",
+   "a person doing kung fu pose very fast",
+   "The boxer dodges quickly, shifting their weight from side to side.",
+   "a person turns around and quickly runs forward before doing kick.",
+   "a person with knees bent, curls up by hunching over, and then stands straight up.",
+   "a person jumps forwards and turns left in mid air",
+   "a person is making a high kick with his left leg.",
+   "the person is throwing a baseball.",
+   "a person is pushing a shopping cart.",
+   "The person jumps in the air while doing a kick spin to the right.",
+   "the figure is appears to be grabbing something for balance at shoulder height with their right hand as they balance with on foot with their left foot and twist their right from side to side, and side to side again.",
+   "a person stands up from a kneeling position, using their right arm to help themselves up.",
+   "A character is running on a treadmill.",
+   "A person bounces lightly on his foot, his stance loose and ready to move.",
+   "A person steps forward explosively, driving his whole body into a crushing straight punch.",
+   "A person lifts his left foot above his head and stretches his arms out to the sides.",
+   "a man side steps to each side, rotating his body with each side step.",
+   "A man rises from the ground, walks to the left and sits back down on the ground.",
+   "a person jogs in place, slowly at first, then increases speed.",
+   "He ran a few steps and jumped into the air.",
+   "a person runs forward curving to the left.",
+   "a person starts jogging slightly forwards creating a loop and stopping.",
+   "A person is running on a treadmill.", "The person takes 4 steps backwards.",
+   "A person jumps up and then lands.",
+   "The person was pushed but did not fall.",
    "The person does a salsa dance.", "A figure streches it hands and arms above its head.",
    "This person kicks with his right leg then jabs several times.",
    "A person stands for few seconds and picks up his arms and shakes them.",
@@ -59,14 +81,14 @@ EXAMPLES = [
    "a person moves ahead a few steps quickly.",
    "a person walks forward and is pushed forward.",
    "this man is bent forward and walks slowly around.",
-#    "A person walks with a limp, their left leg gets injured.",
+   "A person walks with a limp, their left leg gets injured.",
    "A person repeatedly blocks their face with their right arm.",
-#    "The person holds his left foot with his left hand, puts his right foot up and left hand up too.",
+   "The person holds his left foot with his left hand, puts his right foot up and left hand up too.",
    "The person holds their left foot with their left hand, lifting both their left foot and left hand up.",
-#    "A person stands, crosses left leg in front of the right, lowering themselves until they are sitting, both hands on the floor before standing and uncrossing legs.",
+   "A person stands, crosses left leg in front of the right, lowering themselves until they are sitting, both hands on the floor before standing and uncrossing legs.",
    "The person stands, crosses their left leg in front of the right, lowers themselves until they are sitting with both hands on the floor, and then stands back up, uncrossing their legs.",
    "a person brings up their right hand from their side to touch their nose, drops their arm back down, and takes two steps backwards.",
-#    "The man walked forward, spun right on one foot and walked back to his original position.",
+   "The man walked forward, spun right on one foot and walked back to his original position.",
    "A man is walking forward then steps over an object then continues walking forward.",
    "a person dances in celebration, thrusting their arms in the air and moving side to side.",
    "a person does a cartwheel and then walks in a circle to the right."
@@ -139,7 +161,7 @@ dim_pose = 263
 opt.nb_joints = 22
 # --------------------------- HumanML3D --------------------
 # out_dir = pjoin(opt.check)
-root_dir = pjoin(opt.checkpoints_dir, 't2m', 't2m_pkeep_rope_ffsize768_bs64_milestone100_200')
+root_dir = pjoin(opt.checkpoints_dir, 't2m', 'mosa_reimpl')
 
 model_opt_path = pjoin(root_dir, 'opt.txt')
 model_opt = get_opt(model_opt_path, device=opt.device)
@@ -178,42 +200,42 @@ def t2m_inv_transform(data):
 
 
 # --------------------------- Motion-X --------------------
-# out_dir = pjoin(opt.check)
-root_dir = pjoin(opt.checkpoints_dir, 'motionx', 't2m_pkeep_rope_ffsize768_bs64_milestone100_200')
+# # out_dir = pjoin(opt.check)
+# root_dir = pjoin(opt.checkpoints_dir, 'motionx', 't2m_pkeep_rope_ffsize768_bs64_milestone100_200')
 
-model_opt_path = pjoin(root_dir, 'opt.txt')
-model_opt = get_opt(model_opt_path, device=opt.device)
+# model_opt_path = pjoin(root_dir, 'opt.txt')
+# model_opt = get_opt(model_opt_path, device=opt.device)
 
 
-#######################
-######Loading SVQ######
-#######################
-vq_opt_path = pjoin(opt.checkpoints_dir, 'motionx', model_opt.vq_name, 'opt.txt')
-vq_opt = get_opt(vq_opt_path, device=opt.device)
-vq_opt.dim_pose = dim_pose
-motionx_vq_model = load_vq_model(vq_opt)
+# #######################
+# ######Loading SVQ######
+# #######################
+# vq_opt_path = pjoin(opt.checkpoints_dir, 'motionx', model_opt.vq_name, 'opt.txt')
+# vq_opt = get_opt(vq_opt_path, device=opt.device)
+# vq_opt.dim_pose = dim_pose
+# motionx_vq_model = load_vq_model(vq_opt)
 
-model_opt.scales = vq_opt.scales
-model_opt.nb_code_st = vq_opt.nb_code_st
-model_opt.nb_code_ed = vq_opt.nb_code_ed
-model_opt.code_dim = vq_opt.code_dim
+# model_opt.scales = vq_opt.scales
+# model_opt.nb_code_st = vq_opt.nb_code_st
+# model_opt.nb_code_ed = vq_opt.nb_code_ed
+# model_opt.code_dim = vq_opt.code_dim
 
-#################################
-######Loading Transformer######
-#################################
-motionx_transformer = load_trans_model(model_opt, opt, 'net_best_fid.tar')
+# #################################
+# ######Loading Transformer######
+# #################################
+# motionx_transformer = load_trans_model(model_opt, opt, 'net_best_fid.tar')
 
-motionx_transformer.eval()
-motionx_vq_model.eval()
+# motionx_transformer.eval()
+# motionx_vq_model.eval()
 
-motionx_transformer.to(opt.device)
-motionx_vq_model.to(opt.device) 
+# motionx_transformer.to(opt.device)
+# motionx_vq_model.to(opt.device)
 
-##### ---- Dataloader ---- #####
-motionx_mean = np.load(pjoin(opt.checkpoints_dir, 'motionx', model_opt.vq_name, 'meta', 'mean.npy'))
-motionx_std = np.load(pjoin(opt.checkpoints_dir, 'motionx', model_opt.vq_name, 'meta', 'std.npy'))
-def motionx_inv_transform(data):
-    return data * t2m_std + t2m_mean
+# ##### ---- Dataloader ---- #####
+# motionx_mean = np.load(pjoin(opt.checkpoints_dir, 'motionx', model_opt.vq_name, 'meta', 'mean.npy'))
+# motionx_std = np.load(pjoin(opt.checkpoints_dir, 'motionx', model_opt.vq_name, 'meta', 'std.npy'))
+# def motionx_inv_transform(data):
+#     return data * t2m_std + t2m_mean
 
 # ------------------------------ Done ---------------------------
 
@@ -348,10 +370,10 @@ def generate_component(generate_function, retarget_finction, text, role, step, u
         transformer = t2m_transformer
         vq_model = t2m_vq_model
         inv_transform = t2m_inv_transform
-    elif dataset == 'Motion-X':
-        transformer = motionx_transformer
-        vq_model = motionx_vq_model
-        inv_transform = motionx_inv_transform
+    # elif dataset == 'Motion-X':
+    #     transformer = motionx_transformer
+    #     vq_model = motionx_vq_model
+    #     inv_transform = motionx_inv_transform
     else:
         raise NotImplementedError("")
     step = step-1
@@ -437,7 +459,7 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
             with gr.Row():
                 with gr.Column(scale=1):
                     dataset = gr.Radio(
-                        ["HumanML3D", "Motion-X"],
+                        ["HumanML3D"],  # "Motion-X" disabled
                         label="Dataset",
                         value="HumanML3D",
                         info="The different pre-trained weights will be used.",
